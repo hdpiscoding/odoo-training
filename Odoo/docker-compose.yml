@@ -1,0 +1,32 @@
+version: "3.1"
+
+services:
+  odoo18:
+    build: ./box
+    ports:
+      - "8069:8069"
+    volumes:
+      - ./:/opt/odoo
+      - odoo_data:/root/.local/share/Odoo
+    depends_on:
+      - postgres
+      # - nginx
+    restart: unless-stopped
+    tty: true
+    command: bash -c "python3 /opt/odoo/odoo/odoo-bin -c /opt/odoo/odoo.conf -d Odoo && tail -f /dev/null"
+  postgres:
+    image: postgres:13
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: odoo
+      POSTGRES_PASSWORD: odoo
+    tty: true
+
+volumes:
+  odoo_data:
+  postgres_data:

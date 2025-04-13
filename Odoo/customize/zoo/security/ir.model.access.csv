@@ -1,0 +1,8 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_zoo_animal,access_zoo_animal,model_zoo_animal,base.group_user,1,1,1,1
+access_zoo_creature,access_zoo_creature,model_zoo_creature,base.group_user,1,1,1,1
+access_zoo_cage,access_zoo_cage,model_zoo_cage,base.group_user,1,1,1,1
+access_zoo_toy_add_wizard,access_zoo_toy_add_wizard,model_zoo_toy_add_wizard,base.group_user,1,1,1,1
+access_zoo_toy_clear_wizard,access.zoo.toy.clear.wizard,model_zoo_toy_clear_wizard,base.group_user,1,1,1,1
+access_zoo_dummy,access_zoo_dummy,model_zoo_dummy,base.group_user,1,1,1,1
+access_zoo_dummy_categ,access_zoo_dummy_categ,model_zoo_dummy_category,base.group_user,1,1,1,1

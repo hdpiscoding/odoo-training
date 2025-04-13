@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+    <record id="zoo_cage_list_view" model="ir.ui.view">
+      <field name="name">zoo.cage.list.view</field>
+      <field name="model">zoo.cage</field>
+      <field name="arch" type="xml">
+        <list string="Cages" default_order="create_date desc">
+          <field name="name"/>
+          <field name="code"/>
+          <field name="length"/>
+          <field name="width"/>
+          <field name="height"/>
+          <field name="description"/>
+        </list>
+      </field>
+    </record>
+    
+    <record id="zoo_cage_form_view" model="ir.ui.view">
+      <field name="name">zoo.cage.form.view</field>
+      <field name="model">zoo.cage</field>
+      <field name="arch" type="xml">
+        <form>
+          <sheet>
+            <div class="oe_title">
+              <label for="name" string="Cage" class="oe_edit_only"/>
+              <h1><field name="name" placeholder="e.g. Elephant Cage"/></h1>
+            </div>
+
+            <group name="basic_information">
+              <group>
+                <field name="length"/>
+                <field name="width"/>
+                <field name="height"/>
+              </group>
+              <group>
+                <field name="code"/>
+                <field name="description"/>
+              </group>
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="zoo_cage_kanban_view">
+      <field name="name">zoo.cage.kanban.view</field>
+      <field name="model">zoo.cage</field>
+      <field name="arch" type="xml">
+        <kanban class="o_kanban_mobile">
+          <field name="id"/>
+          <field name="code"/>
+          <field name="length"/>
+          <field name="width"/>
+          <field name="height"/>
+          <field name="description"/>
+          <templates>
+            <t t-name="kanban-box">
+              <div class="o_kanban_details">
+                <strong class="o_kanban_record_title"><h1><field name="name"/></h1></strong>
+                <div class="row">
+                  <div class="col-6">
+                    <strong>Code:</strong> <field name="code"/>
+                  </div>
+                  <div class="col-6">
+                    <strong>Dimensions (m):</strong> <field name="length"/> x <field name="width"/> x <field name="height"/>
+                  </div>
+                </div>
+              </div>
+            </t>
+          </templates>
+        </kanban>
+      </field>
+    </record>
+
+    <record id="action_zoo_cage" model="ir.actions.act_window">
+      <field name="name">Cage</field>
+      <field name="res_model">zoo.cage</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="view_ids" eval="[
+      (5, 0, 0), 
+      (0, 0, {'view_mode': 'list', 'view_id': ref('zoo_cage_list_view')}), 
+      (0, 0, {'view_mode': 'form', 'view_id': ref('zoo_cage_form_view')}),
+      (0, 0, {'view_mode': 'kanban', 'view_id': ref('zoo_cage_kanban_view')})]"/>
+    </record>
+
+    <menuitem id="menu_zoo_configuration_cage" name="Cage" sequence="50" parent="menu_zoo_configuration" action="action_zoo_cage" groups="base.group_user"/>
+  </data>
+</odoo>
